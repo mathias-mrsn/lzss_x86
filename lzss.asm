@@ -304,46 +304,11 @@ LzssDecoder:
     ret
 .done:
     add         rsp, _LZSSD_OFF_size
+    ret
 
-
-_exit:
-    mov r1, 0x1
-    REL original
-    mov r2, r5
-    mov rdx, text_len
-    mov rax, SYS_WRITE
-    syscall
-    mov         rax, SYS_EXIT
-    syscall
-
-
-
-
-
-
-
-    
 
 get_fixed_addr:
     call        reference
 reference:
     pop         r5
     ret
-
-
-SECTION .data
-
-test: db '1'
-
-text: db "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vestibulum ut dolor ac auctor. Vivamus consectetur pharetra efficitur. Nunc cursus non sapien eget vestibulum. Donec vestibulum nibh nisl, sed venenatis lorem scelerisque quis. Vestibulum urna eros, sagittis ut nunc et, bibendum auctor lacus. Morbi tempus aliquam semper. Suspendisse vitae pharetra quam. Curabitur vel quam quam. Donec nibh velit, egestas eu magna vel, rutrum facilisis nibh. Morbi imperdiet luctus est pretium porta. Quisque molestie lorem sapien, a tempus metus tincidunt sit amet. Fusce congue et nibh accumsan faucibus. \
-Duis interdum ligula eget massa pharetra, sed sodales enim aliquet. Fusce convallis mi dui, sit amet sodales tortor pretium ac. Quisque at nunc ullamcorper, maximus orci in, auctor quam. Integer eget mauris vitae dui faucibus eleifend. Phasellus sodales ultricies turpis, a ullamcorper leo facilisis eu. Quisque ut pulvinar felis, nec porttitor sem. Quisque lobortis, velit vitae placerat semper, magna quam pharetra neque, ut tempus felis turpis gravida lorem. Nam at vehicula dui. Aliquam sit amet libero elementum, condimentum turpis nec, elementum mauris. Etiam dignissim vehicula bibendum. Praesent bibendum gravida leo, sed commodo neque tincidunt non. Donec a maximus nisl, sed volutpat risus. In bibendum quis urna ut lobortis. Suspendisse suscipit tincidunt augue et lobortis. Aliquam sed laoreet massa. \
-Donec eu nunc ac tortor commodo facilisis. Ut commodo tincidunt nisi non cursus. Donec rhoncus vestibulum tellus in consequat. Proin fringilla justo tortor, id auctor diam convallis at. Quisque id est sollicitudin risus egestas tempor nec sit amet massa. Morbi commodo, justo id tempor tristique, orci nisi malesuada ex, eu vestibulum mi nibh ac felis. Morbi hendrerit justo in erat sodales dictum. \
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce iaculis consectetur leo vel sollicitudin. Nunc massa ex, fermentum a venenatis at, porta ut nisi. Nulla facilisi. Fusce posuere faucibus lorem, eu scelerisque felis tincidunt sit amet. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae Nunc sed ligula arcu. \
-Suspendisse nulla sapien, condimentum vitae purus eget, vehicula bibendum lectus. Nulla facilisi. Morbi a luctus diam, quis imperdiet nisl. Aliquam et aliquam risus. Aliquam erat volutpat. Nullam iaculis tellus interdum, laoreet nisi nec, consectetur est. Aenean porttitor porttitor lectus, ac ultricies urna congue nec. Integer porttitor, tortor ut condimentum tristique, libero sem blandit leo, nec varius lacus neque eget magna. In dictum volutpat justo, sed pharetra neque eleifend vel. \
-Donec vehicula felios non justo rutrum feugiat. Phasellus nibh libero, porta eget nibh a, maximus tristique sem. Cras vitae consectetur libero. Nam imperdiet elit vel felis semper, id placerat neque scelerisque. In enim odio, hendrerit id sodales id, cursus et enim. Aliquam id ex ut ipsum scelerisque accumsan ac id nunc. Nam pharetra mattis leo, sed sagittis ligula tempus laoreet. Aenean nibh odio, sollicitudin id suscipit vitae, suscipit malesuada dui. Maecenas tortor libero, porta nec lorem a, imperdiet vehicula velit. Nulla vel nibh eu orci efficitur ornare. Mauris et vulputate magna. Duis vestibulum faucibus dapibus. Phasellus vulputate arcu eu orci faucibus, a tristique sapien molestie. In luctus ligula diam, id efficitur.a"
-text_len: equ $-text
-
-
-output: times 3000 db 0x11
-
-original: times 3000 db 0x12
