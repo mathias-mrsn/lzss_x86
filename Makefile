@@ -9,23 +9,12 @@ OBJS_ASM    =  $(addprefix ${OBJDIR}/,${SRCS_ASM:.asm=.o})
 
 DEPENDS =	$(addprefix ${DEPSDIR}/,${SRCS:.c=.d})
 CC		=	clang
-#ASMC    =   /mnt/nfs/homes/xchalle/nasm-2.16.01/nasm
 ASMC    =   nasm
-FLAGS	=	-g3 #-fsanitize=address -Wall -Wextra -Werror -Wimplicit-function-declaration -Wtrigraphs -m64
 INCS	=	-I ./src -I ./asm
 OBJDIR 	=	.objs
 DEPSDIR =	.deps
 SRCDIR 	= 	.
 ASMDIR  =   .
-
-ifeq ($(DEBUG),on)
-	FLAGS += -D COMPILATION_DEBUG
-endif
-
-KEY_LENGTH = 128
-ifeq ($(KEY_LENGTH),$(filter $(KEY_LENGTH),128 192 256 ))
-	FLAGS += -D KEY_LENGTH=${KEY_LENGTH}
-endif
 
 _GREY=	$'\033[30m
 _RED=	$'\033[31m
@@ -59,17 +48,7 @@ $(OBJDIR)/%.o: ${ASMDIR}/%.asm
 ${NAME}:	init ${OBJS} ${OBJS_ASM}
 	@printf "%-15s ${_PURPLE}${_BOLD}${NAME}${_END}...\n" "Compiling"
 	@${CC} ${FLAGS} ${INCS} -o ${NAME} ${OBJS} ${OBJS_ASM} -no-pie 
-ifeq ($(MAKE_WOODY_WRITABLE), on)
-	@gcc .dev/make_elf_fully_writable.c -o .dev/make_elf_fully_writable 2>/dev/null
-	@./.dev/make_elf_fully_writable ${NAME}
-endif
 	@printf "\n${_GREEN}${_BOLD}Compilation done !${_END}\n"
-
-xchalle: init ${OBJS}
-	@${CC} ${FLAGS} ${INCS} -o ${NAME} ${OBJS} -no-pie
-	@printf "\n${_GREEN}${_BOLD}Compilation done !${_END}\n"
-
-
 
 clean:		
 	@printf "%-15s ${_RED}${_BOLD}${NAME}'s object files${_END}...\n" "Deleting"
@@ -78,7 +57,6 @@ clean:
 	@rm -rf ${OBJDIR}
 	@printf "%-15s ${_RED}${_BOLD}${NAME}'s dependency files${_END}...\n" "Deleting"
 	@rm -rf ${DEPSDIR}
-
 
 fclean:		clean
 	@printf "%-15s ${_RED}${_BOLD}${NAME}${_END}...\n" "Deleting"

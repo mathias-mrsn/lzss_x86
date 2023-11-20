@@ -18,7 +18,7 @@
  * @warning The ouputAddr pointer must be allocated.
  */
 extern void
-LzssEncoder (void * inputAddr, size_t inputLength, void *outputAddr);
+LzssEncoder (const void * inputAddr, size_t inputLength, void *outputAddr);
 /**
  * @brief Uncompress data pointed to by inputAddr
  *
@@ -33,6 +33,6 @@ LzssEncoder (void * inputAddr, size_t inputLength, void *outputAddr);
  * @warning The ouputAddr pointer must be allocated.
  */
 extern void
-LzssDecoder (void * inputAddr, size_t inputLength, void *outputAddr);
+LzssDecoder (const void * inputAddr, size_t inputLength, void *outputAddr);
 
 #endif
