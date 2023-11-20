@@ -305,10 +305,3 @@ LzssDecoder:
 .done:
     add         rsp, _LZSSD_OFF_size
     ret
-
-
-get_fixed_addr:
-    call        reference
-reference:
-    pop         r5
-    ret
