@@ -212,7 +212,6 @@ LzssDecoder:
 ; @stack - _LZSSD_OFF
 ;-----------------------------------------------------
 .allocate:
-    XORX        rcx
     sub         rsp, _LZSSD_OFF_size
 .init:
     mov         qword [rsp+_LZSSD_OFF.inputaddr], r1
