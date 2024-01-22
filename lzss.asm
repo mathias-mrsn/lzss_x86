@@ -66,7 +66,9 @@ LzssEncoder:
     mov         byte [rsp+_LZSSE_OFF.match_len], 0x0
     mov         byte [rsp+_LZSSE_OFF.match_pos], 0x1
     lea         rdi, [rsp+_LZSSE_OFF.buffer]
-    add         di, word [rsp+_LZSSE_OFF.la_index]
+    XORX        rax
+    mov         ax, word [rsp+_LZSSE_OFF.la_index]
+    add         rdi, rax
     XORX        rax, rbx
     mov         al, byte [rdi]
     mov         byte [rsp+_LZSSE_OFF.character], al
